@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from industries.models import Category
+from .models import Category
+
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -7,6 +8,10 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'children')
 
     def get_fields(self):
+        """
+        Get category related children.
+        :return: fields with children array
+        """
         fields = super(CategorySerializer, self).get_fields()
         fields['children'] = CategorySerializer(many=True)
         return fields

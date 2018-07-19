@@ -1,18 +1,20 @@
 from django.db import models
 
+
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=200)
     parent = models.ForeignKey(
         "self",
-        blank = True,
-        null = True,
-        related_name = "children", 
-        on_delete = models.CASCADE
+        blank=True,
+        null=True,
+        related_name="children",
+        on_delete=models.CASCADE
     )
 
     class Meta:
         verbose_name_plural = "categories"
+        unique_together = ("name", "parent")
 
     def __str__(self):
         path = [self.name]

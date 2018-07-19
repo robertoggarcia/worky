@@ -28,9 +28,10 @@ class BasePermission(object):
         """
         return True
 
+
 class IsAuthenticated(BasePermission):
     """
-    Allows access only to authenticated users.
+    Allows access only when token is set.
     """
 
     def has_permission(self, request, view):
